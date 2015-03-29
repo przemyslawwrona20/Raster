@@ -59,7 +59,13 @@ public class ImageRunnable implements Runnable {
 		}
 		new FramePreview(imageFinal, "FINAL IMAGE");
 	}
-
+	
+	/** counts correlations between a pixel
+	 * 
+	 * @param sampleFirst pixel from first image
+	 * @param sampleSecond pixel from second image
+	 * @return correlation between two pixels
+	 */
 	private int[] comparePixels(int sampleFirst[], int sampleSecond[]) {
 		double sum = Math.sqrt(Math.pow(sampleFirst[0] - sampleSecond[0], 2)
 				+ Math.pow(sampleFirst[1] - sampleSecond[1], 2)
