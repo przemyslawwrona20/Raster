@@ -2,11 +2,7 @@ package com.wrona.comparePictures;
 
 import java.awt.image.BufferedImage;
 
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class FramePreview extends JFrame {

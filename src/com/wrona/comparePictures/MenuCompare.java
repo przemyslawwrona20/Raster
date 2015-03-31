@@ -35,10 +35,8 @@ public class MenuCompare extends JMenu {
 
 	public void openFile(int value) {
 		JFileChooser chooser = new JFileChooser();
-		
-		
-		//UWAGA TUTAJ
-		chooser.setCurrentDirectory(new File("C:/Users/Student/Desktop"));
+
+		// UWAGA TUTAJ
 		String extensions[] = ImageIO.getReaderFileSuffixes();
 		chooser.setFileFilter(new FileNameExtensionFilter("Image files",
 				extensions));
@@ -86,10 +84,11 @@ public class MenuCompare extends JMenu {
 			return;
 
 		} else {
-			ImageRunnable comparePictures = new ImageRunnable(
-					imageFirst, imageSecond);
+			ImageRunnable comparePictures = new ImageRunnable(imageFirst,
+					imageSecond);
 			comparePictures.run();
 			imageFinal = comparePictures.getImageFinal();
+			show();
 		}
 
 	}
@@ -101,8 +100,11 @@ public class MenuCompare extends JMenu {
 	 *            file's format
 	 */
 	public void saveFile(final String formatName) {
-		if (imageFinal == null)
+		if (imageFinal == null) {
+			JOptionPane.showMessageDialog(this, "Firstly compare two pictures");
 			return;
+		}
+
 		Iterator<ImageWriter> iter = ImageIO
 				.getImageWritersByFormatName(formatName);
 		ImageWriter writer = iter.next();
@@ -153,7 +155,30 @@ public class MenuCompare extends JMenu {
 			writerFormats.add(format);
 			formatNames.removeAll(Arrays.asList(names));
 		}
+		writerFormats.remove("BMP");
+		writerFormats.remove("JPG");
+		writerFormats.remove("JPEG");
+		writerFormats.remove("WBMP");
 		return writerFormats;
 	}
 
+	/**
+	 * Show final image
+	 */
+	public void show() {
+		if (imageFinal == null) {
+			JOptionPane.showMessageDialog(null, "Firstly compare pictures");
+			return;
+		} else {
+			new FramePreview(imageFinal, "FINAL IMAGE");
+		}
+	}
+
+	public void clear() {
+		imageFirst = null;
+		imageSecond = null;
+		imageFinal = null;
+
+		JOptionPane.showMessageDialog(null, "Pictures are deleted");
+	}
 }

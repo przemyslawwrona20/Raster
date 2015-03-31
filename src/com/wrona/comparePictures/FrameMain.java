@@ -1,13 +1,8 @@
 package com.wrona.comparePictures;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Set;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class FrameMain extends JFrame {
@@ -17,7 +12,10 @@ public class FrameMain extends JFrame {
 	private MenuCompare comparatorMenu;
 	private JMenuItem closeItem;
 	private JMenuItem openFirstDataItem, openSecondDataItem, compareDataItem,
-			saveDataItem;
+			showItem, clearItem, saveDataItem;
+
+	private static final int DEFAULT_HEIGHT = 400;
+	private static final int DEFAULT_WIDTH = 400;
 
 	public FrameMain() {
 		fileMenu = new JMenu("FILE");
@@ -62,16 +60,32 @@ public class FrameMain extends JFrame {
 		});
 		comparatorMenu.add(compareDataItem);
 
+		showItem = new JMenuItem("SHOW");
+		showItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				comparatorMenu.show();
+			}
+		});
+		comparatorMenu.add(showItem);
+
+		clearItem = new JMenuItem("CLEAR");
+		clearItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				comparatorMenu.clear();
+			}
+		});
+		comparatorMenu.add(clearItem);
+
 		comparatorMenu.addSeparator();
 
 		saveDataItem = new JMenuItem("SAVE");
 		saveDataItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Set<String> writerFormats = MenuCompare.getWriterFormats();
-				for (String str : writerFormats) {
-					System.out.println(str);
-				}
 				comparatorMenu.saveFile("PNG");
 
 			}
@@ -87,8 +101,6 @@ public class FrameMain extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					comparatorMenu.saveFile(format);
-					System.out.println(format);
-
 				}
 			});
 			formats.add(formatItem);
@@ -103,7 +115,7 @@ public class FrameMain extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("COMPARE PICTURES");
-		setSize(400, 400);
+		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setVisible(true);
 
 	}

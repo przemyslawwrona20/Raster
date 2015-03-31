@@ -57,7 +57,6 @@ public class ImageRunnable implements Runnable {
 				rasterFinal.setPixel(i, j, newPixel);
 			}
 		}
-		new FramePreview(imageFinal, "FINAL IMAGE");
 	}
 	
 	/** counts correlations between a pixel
